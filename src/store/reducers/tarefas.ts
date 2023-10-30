@@ -49,10 +49,23 @@ const tarefasSlice = createSlice({
       if (indexDatarefa >= 0) {
         state.itens[indexDatarefa] = action.payload
       }
+    },
+
+    cadastrar: (state, action: PayloadAction<Tarefa>) => {
+      const tarefaJaExiste = state.itens.find(
+        (tarefa) =>
+          tarefa.titulo.toLowerCase() === action.payload.titulo.toLowerCase()
+      )
+
+      if (tarefaJaExiste) {
+        alert('Tarefa já cadastrada')
+      } else {
+        state.itens.push(action.payload)
+      }
     }
   }
 })
 
-export const { remover, editar } = tarefasSlice.actions
+export const { remover, editar, cadastrar } = tarefasSlice.actions
 
 export default tarefasSlice.reducer
